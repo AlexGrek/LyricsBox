@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="LyricsBox.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LyricsBox.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions >
+        <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
+               CompactPaneLength="50" OpenPaneLength="200" Grid.RowSpan="2">
+            <SplitView.Pane>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="MenuButton1" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+             Width="50" Height="50" Click="HamburgerButton_Click" Background="#FFF73131"/>
+                    </StackPanel>
+                    <ListView Name="hamburgerMenuList" SelectedIndex="0" SelectionChanged="ListView_SelectionChanged" >
+                        <ListViewItem Padding="0" >
+                            <StackPanel Orientation="Horizontal" >
+                                <Border BorderBrush="{x:Null}" Height="50" Width="50">
+                                    <TextBlock x:Name="MenuButton2" FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" TextAlignment="Center" Text="&#xE10F;"></TextBlock>
+                                </Border>
+                                <TextBlock x:Uid="homeTab" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Padding="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderBrush="{x:Null}" Height="50" Width="50">
+                                    <TextBlock x:Name="MenuButton3" FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" TextAlignment="Center" Text="&#xE768;"></TextBlock>
+                                </Border>
+                                <TextBlock x:Uid="playerTab" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Padding="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderBrush="{x:Null}" Height="50" Width="50">
+                                    <TextBlock x:Name="Editor" FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" TextAlignment="Center" Text="&#xE104;"></TextBlock>
+                                </Border>
+                                <TextBlock x:Uid="editorTab" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Padding="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Border BorderBrush="{x:Null}" Height="50" Width="50">
+                                    <TextBlock x:Name="Settings" FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" TextAlignment="Center" Text="&#xE115;"></TextBlock>
+                                </Border>
+                                <TextBlock  x:Uid="settingsTab" FontSize="18" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Frame Name="contentFrame" Margin="0, 0, 0, 0"/>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+</Page>

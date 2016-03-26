@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="LyricsBox.EditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LyricsBox.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <MenuFlyout x:Key="SaveAsFlyout">
+            <MenuFlyoutItem x:Uid="saveToFile" Click="MenuFlyoutItem_Click"></MenuFlyoutItem>
+            <MenuFlyoutItem x:Uid="saveToLyricsTag"></MenuFlyoutItem>
+        </MenuFlyout>
+    </Page.Resources>
+
+    <Page.DataContext >
+        <local:EditorPageViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Pivot Title="Pivot" VerticalAlignment="Stretch" Margin="0,0,0,50" >
+            <PivotItem x:Uid="editTextEditor">
+                <Grid>
+                    <RelativePanel Margin="0,0,0,0" >
+                        <TextBox AcceptsReturn="True" x:Name="lyricTextBox" Margin="20" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True"
+                             RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWith="bottom" Text="{Binding LyricsText, Mode=TwoWay}"/>
+                        <StackPanel x:Name="bottom" RelativePanel.AlignBottomWithPanel="True"
+                                RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignLeftWithPanel="True">
+
+                        </StackPanel>
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Uid="editTimeTagsEditor">
+                <Grid>
+                    <ListView Name="lrcList" ItemsSource="{Binding LyricsList, Mode=TwoWay }" HorizontalContentAlignment="Center"
+                       Margin="0,50,0,0" SelectionChanged="lrcList_ItemClick">
+
+                    </ListView>
+                    <RelativePanel Background="#FFE6E6E6" VerticalAlignment="Top" Height="50" Margin="0">
+                        <Slider x:Name="playbackSlider" Margin="20,0" Value="{Binding SliderPosition, Mode=TwoWay}" RelativePanel.AlignRightWithPanel="True" RelativePanel.RightOf="Controls" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+                        <Grid x:Name="Controls" RelativePanel.AlignLeftWithPanel="True">
+                            <StackPanel x:Name="keypad" Height="50" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0" >
+                                <Button x:Name="play" Command="{Binding PlayCommand}" FontFamily="Segoe MDL2 Assets" Content="&#xE102;&#xE103;" Height="40" Background="{x:Null}" Margin="10,0" />
+                                <TextBlock x:Name="currentTime" Text="{Binding CurrentTime, Mode=OneWay}" VerticalAlignment="Center" Width="100"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar >
+            <AppBarButton x:Uid="openAppBar" Icon="OpenFile" />
+            <AppBarButton x:Uid="saveFileAppbar" Icon="Save" Click="Save_Clicked"/>
+            <AppBarButton x:Uid="saveAsFileAppbar" Icon="SaveLocal" Flyout="{StaticResource SaveAsFlyout}" x:Name="saveAs" Click="AppBarButton_Click"/>
+            <AppBarButton x:Uid="reloadAppBar" Icon="Refresh" />
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
