@@ -29,7 +29,13 @@ namespace LyricsBox
             var htmlWeb = new HtmlWeb();
             Parsed = await htmlWeb.LoadFromWebAsync(url.Uri.ToString());
             var ans = new List<string>();
-            
+            var variants = Parsed.DocumentNode.Descendants("td").Where(d =>
+                d.Attributes.Contains("class") && d.Attributes["class"].Value.Contains("text-left visitedlyr"));
+            foreach (var variant in variants)
+            { 
+                var link = variant.ChildNodes["a"].GetAttributeValue("href", "#");
+                ans.Add(link);
+            }
             return ans;
         }
     }
